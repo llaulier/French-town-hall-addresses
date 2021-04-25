@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model appointedCity {
+  id                                        Int    @id @default(autoincrement())
+  ParentId                                  Int?
+  city_appointedCity_ParentIdTocity         city?  @relation("appointedCity_ParentIdTocity", fields: [ParentId], references: [id])
+  city_appointedCityTocity_appointedCity_Id city[] @relation("appointedCityTocity_appointedCity_Id")
+}
+
+model city {
+  id                                                 Int                @id @default(autoincrement())
+  labelUppercase                                     String
+  name                                               String
+  delegated                                          Boolean
+  appointedCityType                                  appointedCityType?
+  appointedCity_Id                                   Int?               @map("appointedCity.Id")
+  labelComplete                                      String
+  city_inseeCode                                     String             @map("city.inseeCode") @db.VarChar(5)
+  postcode                                           String             @db.VarChar(5)
+  region                                             String
+  codeRegion                                         Int
+  department                                         String
+  codeDepartment                                     Int
+  createdAt                                          DateTime           @default(now())
+  lastUpdate                                         DateTime           @default(now())
+  appointedCity_appointedCityTocity_appointedCity_Id appointedCity?     @relation("appointedCityTocity_appointedCity_Id", fields: [appointedCity_Id], references: [id])
+  appointedCity_appointedCity_ParentIdTocity         appointedCity[]    @relation("appointedCity_ParentIdTocity")
+  townHall                                           townHall[]
+}
+
+model townHall {
+  id                  Int      @id @default(autoincrement())
+  name                String
+  townHall_inseeCode  String   @map("townHall.inseeCode") @db.VarChar(5)
+  postcode            String   @db.VarChar(5)
+  address             String
+  city                String
+  cityId              Int?
+  additional          String?
+  postbox             String?
+  email               String?
+  phone               String?
+  website             String?
+  latitude            Decimal? @db.Decimal
+  longitude           Decimal? @db.Decimal
+  createdAt           DateTime @default(now())
+  lastUpdate          DateTime @default(now())
+  status              String
+  city_cityTotownHall city?    @relation(fields: [cityId], references: [id])
+}
+
+enum appointedCityType {
+  Commune
+  Delegated_commune @map("Delegated commune")
+}
