@@ -1,0 +1,25 @@
+version: '3'
+services:
+  postgres:
+    container_name: address-town-hall-postgres
+    image: postgres:11.2-alpine
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-root}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-root}
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+    tmpfs:
+      - /var/lib/postgresql/data
+    mem_limit: 500m
+    mem_reservation: 300m
+  pgadmin:
+    container_name: address-town-hall-pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - '${PGADMIN_PORT:-5050}:80'
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@admin.fr}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: ${PGADMIN_CONFIG_SERVER_MODE:-True}
