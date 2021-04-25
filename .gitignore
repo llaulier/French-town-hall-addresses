@@ -1,0 +1,17 @@
+
+# Build
+dist
+
+# IDEs
+.idea/
+.vscode/
+
+# Misc
+.DS_Store
+.env
+.env.test
+.env.stage
+.env.prod
+
+# Packages
+node_modules
