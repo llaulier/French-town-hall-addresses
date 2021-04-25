@@ -1,5 +1,4 @@
 -- CreateEnum
-
 CREATE TYPE "appointedCityType" AS ENUM ( 'Commune',
     'Delegated commune'
 );
@@ -72,3 +71,4 @@ ALTER TABLE "city"
     ADD FOREIGN KEY ("appointedCity.Id") REFERENCES "appointedCity" ("id") ON DELETE CASCADE ON
             UPDATE
                 CASCADE;
+
