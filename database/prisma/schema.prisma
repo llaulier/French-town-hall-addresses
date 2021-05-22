@@ -7,20 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model appointedCity {
+model subordinateCity {
   id                                        Int    @id @default(autoincrement())
   ParentId                                  Int?
-  city_appointedCity_ParentIdTocity         city?  @relation("appointedCity_ParentIdTocity", fields: [ParentId], references: [id])
-  city_appointedCityTocity_appointedCity_Id city[] @relation("appointedCityTocity_appointedCity_Id")
+  city_subordinateCity_ParentIdTocity         city?  @relation("subordinateCity_ParentIdTocity", fields: [ParentId], references: [id])
+  city_subordinateCityTocity_subordinateCity_Id city[] @relation("subordinateCityTocity_subordinateCity_Id")
 }
 
 model city {
   id                                                 Int                @id @default(autoincrement())
   labelUppercase                                     String
   name                                               String
-  delegated                                          Boolean
-  appointedCityType                                  appointedCityType?
-  appointedCity_Id                                   Int?               @map("appointedCity.Id")
+  type                                               cityType?
+  subordinateCity_Id                                   Int?               @map("subordinateCity.Id")
   labelComplete                                      String
   city_inseeCode                                     String             @map("city.inseeCode") @db.VarChar(5)
   postcode                                           String             @db.VarChar(5)
@@ -30,8 +29,8 @@ model city {
   codeDepartment                                     Int
   createdAt                                          DateTime           @default(now())
   lastUpdate                                         DateTime           @default(now())
-  appointedCity_appointedCityTocity_appointedCity_Id appointedCity?     @relation("appointedCityTocity_appointedCity_Id", fields: [appointedCity_Id], references: [id])
-  appointedCity_appointedCity_ParentIdTocity         appointedCity[]    @relation("appointedCity_ParentIdTocity")
+  subordinateCity_subordinateCityTocity_subordinateCity_Id subordinateCity?     @relation("subordinateCityTocity_subordinateCity_Id", fields: [subordinateCity_Id], references: [id])
+  subordinateCity_subordinateCity_ParentIdTocity         subordinateCity[]    @relation("subordinateCity_ParentIdTocity")
   townHall                                           townHall[]
 }
 
@@ -56,7 +55,8 @@ model townHall {
   city_cityTotownHall city?    @relation(fields: [cityId], references: [id])
 }
 
-enum appointedCityType {
-  Commune
-  Delegated_commune @map("Delegated commune")
+enum cityType {
+  City
+  Delegated_city @map("Delegated city")
+  Subordinate_city @map("Subordinate city")
 }
