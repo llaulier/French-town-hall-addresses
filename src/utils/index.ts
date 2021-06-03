@@ -11,7 +11,7 @@ export const handleError = (error: Error, response: Response) => {
     console.log(`error :>>`, error);
   }
 
-  if ((error as any).code === 'EAI_AGAIN') {
+  if ((error as any).code === 'TRY_AGAIN') {
     return response.status(500).json({
       status: 500,
       message: 'Server Error',
