@@ -33,4 +33,5 @@ const addCity = async (req: Request, res: Response) : promise<void> => {
           }
         const newCity = await prisma.city.create({ data: city })
     }   
+    const docInputs: Prisma.DocumentCreateWithoutOrderInput[] = []
 }
