@@ -1,17 +1,17 @@
-import {Prisma} from '@prisma/client'
+import {Prisma, PrismaClient} from '@prisma/client'
 import {Request, Response} from 'express'
-import {prisma} from '../../lib/prisma'
 import { NewCityPayload } from '../../types/index'
 import { handleError } from '../../utils'
 
+const prisma = new PrismaClient()
 
-const addCity = async (req: Request, res: Response) : promise<void> => {
+export const addCity = async (req: Request, res: Response): Promise<void> => {
     try {
         const body: NewCityPayload = req.body
         const { 
             name,
-            postCode,
-            labelUpercase,
+            postcode,
+            labelUppercase,
             labelComplete,
             codeRegion,
             region,
@@ -20,18 +20,20 @@ const addCity = async (req: Request, res: Response) : promise<void> => {
             inseeCode
         } = body
 
-        const city: Prisma.CityCreateInput = {
+        const city: Prisma.cityCreateInput = {
             name,
-            postCode,
-            labelUpercase,
+            postcode,
+            labelUppercase,
             labelComplete,
             codeRegion,
             region,
             department,
             codeDepartment,
-            inseeCode
+            city_inseeCode: inseeCode
           }
         const newCity = await prisma.city.create({ data: city })
-    }   
-    const docInputs: Prisma.DocumentCreateWithoutOrderInput[] = []
+    }   catch (error) {
+        handleError(error, res)
+    }
+    
 }
