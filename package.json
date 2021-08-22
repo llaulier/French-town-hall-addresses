@@ -10,11 +10,7 @@
     "test": "jest",
     "dev": "tsnd --respawn ./src/index.ts",
     "db:init": "docker-compose --env-file .env up -d && docker-compose logs -f",
-    "db:init:stage": "docker-compose --env-file .env.stage up -d && docker-compose logs -f",
-    "db:init:prod": "docker-compose --env-file .env.prod up -d && docker-compose logs -f",
-    "db:migrate": "dotenv -e .env -- npx prisma migrate dev",
-    "db:migrate:stage": "dotenv -e .env.stage -- npx prisma migrate deploy",
-    "db:migrate:prod": "dotenv -e .env.prod -- npx prisma migrate deploy",
+    "db:migrate": "yarn prisma migrate dev",
     "seed": "tsnd ./database/prisma/seed/index.ts"
   },
   "author": "",

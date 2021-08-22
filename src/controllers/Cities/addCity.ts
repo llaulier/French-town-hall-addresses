@@ -5,7 +5,7 @@ import { handleError } from '../../utils'
 
 const prisma = new PrismaClient()
 
-export const addCity = async (req: Request, res: Response): Promise<void> => {
+const addCity = async (req: Request, res: Response): Promise<void> => {
     try {
         const body: NewCityPayload = req.body
         const { 
@@ -32,8 +32,10 @@ export const addCity = async (req: Request, res: Response): Promise<void> => {
             city_inseeCode: inseeCode
           }
         const newCity = await prisma.city.create({ data: city })
+        res.status(201).json({ message: 'City added', city: newCity })
     }   catch (error) {
         handleError(error, res)
     }
     
-}
+} 
+export default addCity;

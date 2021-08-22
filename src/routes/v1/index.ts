@@ -1,5 +1,5 @@
 import express, { Router } from "express"
-import addCity from "./addCity"
+import cityRoutes from "./city"
 import whoamiRoutes from "./whoami"
 const router = Router()
 
@@ -7,6 +7,6 @@ router.use(express.json())
 router.use(express.urlencoded({ extended: true }))
 
 router.use(whoamiRoutes)
-router.use(addCity)
+router.use(cityRoutes)
 
 export default router
