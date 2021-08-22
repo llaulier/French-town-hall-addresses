@@ -1,20 +1,26 @@
 {
-    "compilerOptions": {
-      "module": "commonjs",
-      "allowSyntheticDefaultImports": true,
-      "esModuleInterop": true,
-      "target": "es6",
-      "moduleResolution": "node",
-      "noImplicitAny": true,
-      "sourceMap": true,
-      "outDir": "dist",
-      "lib": ["es2015", "dom", "es5"],
-      "baseUrl": "src"
-    },
-    "include": [
-      "src/**/*"
+  "compilerOptions": {
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "lib": [
+      "es2015",
+      "dom",
+      "es5"
     ],
-    "exclude": [
-      "node_modules", "**/*.spec.ts", "dist"
-    ]
-  }
+    "baseUrl": "src"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "dist"
+  ]
+}
