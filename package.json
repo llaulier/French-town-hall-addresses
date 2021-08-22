@@ -3,21 +3,22 @@
   "version": "1.0.0",
   "description": "api adresse mairie",
   "main": "index.js",
+  "jest": {
+    "verbose": true
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "tsnd --respawn ./src/index.ts",
     "db:init": "docker-compose --env-file .env up -d && docker-compose logs -f",
-    "db:init:stage": "docker-compose --env-file .env.stage up -d && docker-compose logs -f",
-    "db:init:prod": "docker-compose --env-file .env.prod up -d && docker-compose logs -f",
-    "db:migrate": "dotenv -e .env -- npx prisma migrate dev",
-    "db:migrate:stage": "dotenv -e .env.stage -- npx prisma migrate deploy",
-    "db:migrate:prod": "dotenv -e .env.prod -- npx prisma migrate deploy",
+    "db:migrate": "yarn prisma migrate dev",
     "seed": "tsnd ./database/prisma/seed/index.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^2.19.0",
+    "@types/core-js": "^2.5.5",
+    "@types/es6-shim": "^0.31.42",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -41,7 +42,7 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.3.1",
-    "jest": "^26.6.3",
+    "jest": "^27.0.4",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "prisma": "^2.21.2",

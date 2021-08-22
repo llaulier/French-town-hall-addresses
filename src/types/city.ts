@@ -2,13 +2,13 @@ export type appointedCityType = 'Commune' | 'Delegated commune' | 'Subordinate c
 
 export interface NewCityPayload  {
     name: string
-    postCode: string
+    postcode: string
     type: appointedCityType
-    labelUpercase: string
+    labelUppercase: string
     labelComplete: string
-    codeRegion: string
+    codeRegion: number
     region: string
     department: string
-    codeDepartment: string
+    codeDepartment: number
     inseeCode: string
 }

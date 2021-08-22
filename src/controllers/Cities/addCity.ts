@@ -1,17 +1,17 @@
-import {Prisma} from '@prisma/client'
+import {Prisma, PrismaClient} from '@prisma/client'
 import {Request, Response} from 'express'
-import {prisma} from '../../lib/prisma'
 import { NewCityPayload } from '../../types/index'
 import { handleError } from '../../utils'
 
+const prisma = new PrismaClient()
 
-const addCity = async (req: Request, res: Response) : promise<void> => {
+const addCity = async (req: Request, res: Response): Promise<void> => {
     try {
         const body: NewCityPayload = req.body
-        const { 
+        const {
             name,
-            postCode,
-            labelUpercase,
+            postcode,
+            labelUppercase,
             labelComplete,
             codeRegion,
             region,
@@ -20,17 +20,22 @@ const addCity = async (req: Request, res: Response) : promise<void> => {
             inseeCode
         } = body
 
-        const city: Prisma.CityCreateInput = {
+        const city: Prisma.cityCreateInput = {
             name,
-            postCode,
-            labelUpercase,
+            postcode,
+            labelUppercase,
             labelComplete,
             codeRegion,
             region,
             department,
             codeDepartment,
-            inseeCode
+            city_inseeCode: inseeCode
           }
         const newCity = await prisma.city.create({ data: city })
-    }   
+        res.status(201).json({ message: 'City added', city: newCity })
+    }   catch (error) {
+        handleError(error, res)
+    }
+
 }
+export default addCity;
