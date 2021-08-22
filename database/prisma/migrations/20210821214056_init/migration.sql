@@ -1,15 +1,19 @@
 -- CreateEnum
-CREATE TYPE "cityType" AS ENUM ('City', 'Delegated city', 'Subordinate city');
+CREATE TYPE "cityType" AS ENUM ( 'City',
+    'Delegated city',
+    'Subordinate city'
+);
 
 -- CreateTable
+
 CREATE TABLE "subordinateCity" (
     "id" SERIAL NOT NULL,
     "ParentId" INTEGER,
-
     PRIMARY KEY ("id")
 );
 
 -- CreateTable
+
 CREATE TABLE "city" (
     "id" SERIAL NOT NULL,
     "labelUppercase" TEXT NOT NULL,
@@ -25,11 +29,11 @@ CREATE TABLE "city" (
     "codeDepartment" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "lastUpdate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
     PRIMARY KEY ("id")
 );
 
 -- CreateTable
+
 CREATE TABLE "townHall" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
@@ -48,15 +52,26 @@ CREATE TABLE "townHall" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "lastUpdate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "status" TEXT NOT NULL,
-
     PRIMARY KEY ("id")
 );
 
 -- AddForeignKey
-ALTER TABLE "subordinateCity" ADD FOREIGN KEY ("ParentId") REFERENCES "city"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+ALTER TABLE "subordinateCity"
+    ADD FOREIGN KEY ("ParentId") REFERENCES "city" ("id") ON DELETE SET NULL ON
+            UPDATE
+                CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "city" ADD FOREIGN KEY ("subordinateCity.Id") REFERENCES "subordinateCity"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+ALTER TABLE "city"
+    ADD FOREIGN KEY ("subordinateCity.Id") REFERENCES "subordinateCity" ("id") ON DELETE SET NULL ON
+            UPDATE
+                CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "townHall" ADD FOREIGN KEY ("cityId") REFERENCES "city"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+ALTER TABLE "townHall"
+    ADD FOREIGN KEY ("cityId") REFERENCES "city" ("id") ON DELETE SET NULL ON
+            UPDATE
+                CASCADE;
