@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
 import {
-    addCity, 
+    addCity,
     getCity
 } from '../../controllers/Cities/index';
 

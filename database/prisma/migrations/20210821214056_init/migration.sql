@@ -75,4 +75,3 @@ ALTER TABLE "townHall"
     ADD FOREIGN KEY ("cityId") REFERENCES "city" ("id") ON DELETE SET NULL ON
             UPDATE
                 CASCADE;
-

@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 const addCity = async (req: Request, res: Response): Promise<void> => {
     try {
         const body: NewCityPayload = req.body
-        const { 
+        const {
             name,
             postcode,
             labelUppercase,
@@ -36,6 +36,6 @@ const addCity = async (req: Request, res: Response): Promise<void> => {
     }   catch (error) {
         handleError(error, res)
     }
-    
-} 
+
+}
 export default addCity;
