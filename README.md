@@ -1,8 +1,8 @@
 # french_town_hall_API
 
-An API in order to find address of town hall in 36000 cities in France.
-Find by matching with the postal code, the city or insee code.
-Usefull in order to automate a mailing service, for example
+An API in order to find address of town hall in 36000 cities in France. Find by
+matching with the postal code, the city or insee code. Usefull in order to
+automate a mailing service, for example
 
 Databases source for city table : Insee.
 
